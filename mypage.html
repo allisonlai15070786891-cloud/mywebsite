@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>赖莉晶 Allison Lai — Product Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --c-bg:       #F5F3EF;
+    --c-surface:  #EDEAE4;
+    --c-border:   #D8D4CC;
+    --c-muted:    #A8A39A;
+    --c-body:     #4A4640;
+    --c-heading:  #1E1C19;
+    --c-accent:   #6B6358;
+    --c-tag-bg:   #E4E0D9;
+    --c-tag-text: #5A5550;
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body:    'DM Sans', system-ui, sans-serif;
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --max-w: 860px;
+    --gap: 120px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--c-bg);
+    color: var(--c-body);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  .container { max-width: var(--max-w); margin: 0 auto; padding: 0 32px; }
+  section { padding: var(--gap) 0; }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--c-muted);
+    margin-bottom: 48px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--c-border); }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 20px 0;
+    background: rgba(245,243,239,0.88);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+  nav.scrolled { border-color: var(--c-border); }
+  .nav-inner {
+    max-width: var(--max-w); margin: 0 auto; padding: 0 32px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo { font-family: var(--font-display); font-size: 15px; color: var(--c-heading); letter-spacing: 0.01em; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { font-size: 13px; color: var(--c-muted); transition: color 0.2s; letter-spacing: 0.02em; }
+  .nav-links a:hover { color: var(--c-heading); }
+
+  /* HERO */
+  #hero { padding: 180px 0 100px; position: relative; overflow: hidden; }
+  .hero-eyebrow {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--c-muted); margin-bottom: 24px;
+  }
+  .hero-name {
+    font-family: var(--font-display);
+    font-size: clamp(52px, 8vw, 88px);
+    line-height: 1.0; letter-spacing: -0.03em;
+    color: var(--c-heading); margin-bottom: 20px;
+  }
+  .hero-name em { font-style: italic; color: var(--c-accent); }
+  .hero-role {
+    font-size: 17px; font-weight: 300; color: var(--c-body);
+    margin-bottom: 44px; max-width: 460px; line-height: 1.7;
+  }
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 28px;
+    background: var(--c-heading); color: var(--c-bg);
+    font-family: var(--font-body); font-size: 13px; font-weight: 500;
+    letter-spacing: 0.04em; border-radius: 100px; border: none; cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.82; transform: translateY(-1px); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 13px 26px;
+    background: transparent; color: var(--c-body);
+    font-family: var(--font-body); font-size: 13px; font-weight: 400;
+    letter-spacing: 0.04em; border-radius: 100px;
+    border: 1px solid var(--c-border); cursor: pointer;
+    transition: border-color 0.2s, color 0.2s, transform 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--c-accent); color: var(--c-heading); transform: translateY(-1px); }
+  .scroll-hint {
+    position: absolute; bottom: 40px; right: 32px;
+    font-size: 11px; color: var(--c-muted); letter-spacing: 0.1em;
+    writing-mode: vertical-rl; display: flex; align-items: center; gap: 10px;
+  }
+  .scroll-hint::before { content: ''; width: 1px; height: 48px; background: var(--c-border); }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: start; }
+  .about-meta { position: sticky; top: 100px; }
+  .about-meta .name { font-family: var(--font-display); font-size: 26px; color: var(--c-heading); line-height: 1.2; margin-bottom: 6px; }
+  .about-meta .title { font-size: 13px; color: var(--c-muted); margin-bottom: 24px; }
+  .status-dot {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-size: 12px; color: var(--c-body);
+    padding: 6px 13px; border: 1px solid var(--c-border); border-radius: 100px;
+  }
+  .status-dot::before {
+    content: ''; width: 7px; height: 7px;
+    background: #8BAF7C; border-radius: 50%;
+    animation: blink 2s ease-in-out infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.35} }
+  .about-text p { font-size: 15px; font-weight: 300; line-height: 1.9; color: var(--c-body); margin-bottom: 18px; }
+  .about-text p:last-child { margin-bottom: 0; }
+  .about-text strong { font-weight: 500; color: var(--c-heading); }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+  .skill-group { background: var(--c-surface); padding: 32px; }
+  .skill-group:first-child { border-radius: var(--radius-md) 0 0 var(--radius-md); }
+  .skill-group:last-child  { border-radius: 0 var(--radius-md) var(--radius-md) 0; }
+  .skill-group-title { font-size: 10px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--c-muted); margin-bottom: 18px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag { font-size: 12px; color: var(--c-tag-text); background: var(--c-tag-bg); padding: 5px 12px; border-radius: 100px; border: 1px solid var(--c-border); }
+
+  /* PROJECTS */
+  .projects-list { display: flex; flex-direction: column; gap: 2px; }
+  .project-card { background: var(--c-surface); border-radius: var(--radius-md); overflow: hidden; cursor: pointer; transition: background 0.2s; }
+  .project-card:hover { background: var(--c-tag-bg); }
+  .project-header { padding: 36px 40px; display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
+  .project-index { font-size: 11px; color: var(--c-muted); letter-spacing: 0.1em; margin-bottom: 10px; }
+  .project-title { font-family: var(--font-display); font-size: 26px; color: var(--c-heading); margin-bottom: 8px; line-height: 1.2; }
+  .project-sub { font-size: 14px; color: var(--c-muted); font-weight: 300; }
+  .proj-toggle {
+  height: 36px;
+  padding: 0 16px 0 18px;
+  border-radius: 100px;
+  border: 1px solid var(--c-border);
+  display: flex; align-items: center; gap: 8px;
+  flex-shrink: 0; margin-top: 4px;
+  transition: background 0.2s, border-color 0.2s;
+  background: var(--c-bg);
+  }
+  .project-card:hover .proj-toggle { border-color: var(--c-accent); background: var(--c-bg); }
+  .proj-toggle-text {
+  font-size: 12px; color: var(--c-body);
+  letter-spacing: 0.04em; white-space: nowrap;
+  transition: color 0.2s;
+  }  
+  .proj-toggle svg { width: 12px; height: 12px; stroke: var(--c-accent); transition: transform 0.35s; }
+  .project-card.open .proj-toggle svg { transform: rotate(180deg); }
+  .project-card.open .proj-toggle-text::before { content: '收起'; }
+  .project-card.open .proj-toggle-text { font-size: 0; }
+  .project-card.open .proj-toggle-text::before { font-size: 12px; }
+  
+  .project-detail { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.16,1,0.3,1); }
+  .project-card.open .project-detail { max-height: 1500px; }
+  .detail-inner { padding: 36px 40px 40px; border-top: 1px solid var(--c-border); }
+  .detail-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; margin-bottom: 32px; }
+  .detail-lbl { font-size: 10px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--c-muted); margin-bottom: 8px; }
+  .detail-txt { font-size: 14px; line-height: 1.7; color: var(--c-body); font-weight: 300; }
+  .img-placeholder {
+  width: 100%; height: auto; background: transparent; border-radius: var(--radius-sm);
+  display: block;
+  font-size: 12px; color: var(--c-muted); letter-spacing: 0.08em; margin-top: 24px;
+  overflow: hidden;
+}
+.img-placeholder img {
+  width: 100%; height: auto; display: block; border-radius: var(--radius-sm);
+}
+  .proj-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+
+  /* PRD */
+  .prd-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .prd-card {
+    background: var(--c-surface); padding: 32px 36px;
+    display: flex; flex-direction: column; gap: 12px;
+    transition: background 0.2s; cursor: pointer; text-decoration: none;
+  }
+  .prd-grid .prd-card:nth-child(1) { border-radius: var(--radius-md) 0 0 0; }
+  .prd-grid .prd-card:nth-child(2) { border-radius: 0 var(--radius-md) 0 0; }
+  .prd-grid .prd-card:nth-child(3) { border-radius: 0 0 0 var(--radius-md); }
+  .prd-grid .prd-card:nth-child(4) { border-radius: 0 0 var(--radius-md) 0; }
+  .prd-card:hover { background: var(--c-tag-bg); }
+  .prd-icon { width: 34px; height: 34px; border-radius: var(--radius-sm); background: var(--c-border); display: flex; align-items: center; justify-content: center; }
+  .prd-icon svg { width: 15px; height: 15px; stroke: var(--c-accent); }
+  .prd-name { font-family: var(--font-display); font-size: 20px; color: var(--c-heading); line-height: 1.2; }
+  .prd-desc { font-size: 13px; color: var(--c-muted); font-weight: 300; line-height: 1.65; }
+  .prd-meta { font-size: 11px; color: var(--c-muted); letter-spacing: 0.07em; display: flex; align-items: center; gap: 6px; margin-top: auto; padding-top: 8px; }
+  .prd-meta::before { content: ''; width: 16px; height: 1px; background: var(--c-border); }
+
+  /* AI DEMO */
+  .demo-wrapper { background: var(--c-surface); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--c-border); }
+  .demo-header {
+    padding: 18px 26px; border-bottom: 1px solid var(--c-border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .demo-dots { display: flex; gap: 6px; }
+  .demo-dots span { width: 10px; height: 10px; border-radius: 50%; background: var(--c-border); }
+  .demo-url { font-size: 12px; color: var(--c-muted); }
+  .demo-badge { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-muted); padding: 4px 10px; border: 1px solid var(--c-border); border-radius: 100px; }
+  .demo-body { width: 100%; height: 560px; background: var(--c-surface); position: relative; display: flex; align-items: center; justify-content: center; }
+  .demo-placeholder { text-align: center; }
+  .demo-placeholder-icon { width: 46px; height: 46px; border-radius: var(--radius-md); background: var(--c-border); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+  .demo-placeholder-icon svg { width: 20px; height: 20px; stroke: var(--c-muted); }
+  .demo-placeholder p { font-size: 14px; color: var(--c-muted); font-weight: 300; margin-bottom: 20px; }
+  .demo-load-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 24px; background: var(--c-heading); color: var(--c-bg);
+    font-size: 13px; font-weight: 500; border: none; border-radius: 100px;
+    cursor: pointer; transition: opacity 0.2s;
+  }
+  .demo-load-btn:hover { opacity: 0.8; }
+  #demo-iframe { width: 100%; height: 100%; border: none; display: none; }
+
+  /* CONTACT */
+  #contact { padding-bottom: 160px; }
+  .contact-card {
+    background: var(--c-surface); border-radius: var(--radius-lg); padding: 64px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+  }
+  .contact-heading { font-family: var(--font-display); font-size: clamp(30px, 5vw, 50px); color: var(--c-heading); line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 14px; }
+  .contact-heading em { font-style: italic; color: var(--c-accent); }
+  .contact-sub { font-size: 14px; color: var(--c-muted); font-weight: 300; line-height: 1.75; }
+  .contact-items { display: flex; flex-direction: column; gap: 4px; }
+  .contact-item {
+    display: flex; align-items: center; gap: 16px;
+    padding: 18px 20px; background: var(--c-bg); border-radius: var(--radius-md);
+    transition: background 0.2s; cursor: pointer; text-decoration: none;
+  }
+  .contact-item:hover { background: var(--c-tag-bg); }
+  .ci-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--c-surface); border: 1px solid var(--c-border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .ci-icon svg { width: 15px; height: 15px; stroke: var(--c-accent); }
+  .ci-label { font-size: 11px; color: var(--c-muted); letter-spacing: 0.07em; margin-bottom: 2px; }
+  .ci-value { font-size: 14px; color: var(--c-heading); font-weight: 400; }
+
+  /* FOOTER */
+  footer { border-top: 1px solid var(--c-border); padding: 32px 0; }
+  .footer-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: var(--c-muted); }
+
+  /* FADE IN */
+  .fi { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fi.in { opacity: 1; transform: none; }
+
+  /* RESPONSIVE */
+  @media (max-width: 700px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .about-meta { position: static; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .skill-group:first-child { border-radius: var(--radius-md) var(--radius-md) 0 0; }
+    .skill-group:last-child  { border-radius: 0 0 var(--radius-md) var(--radius-md); }
+    .detail-grid { grid-template-columns: 1fr; gap: 20px; }
+    .prd-grid { grid-template-columns: 1fr; }
+    .prd-grid .prd-card:nth-child(1) { border-radius: var(--radius-md) var(--radius-md) 0 0; }
+    .prd-grid .prd-card:nth-child(2) { border-radius: 0; }
+    .prd-grid .prd-card:nth-child(3) { border-radius: 0; }
+    .prd-grid .prd-card:nth-child(4) { border-radius: 0 0 var(--radius-md) var(--radius-md); }
+    .contact-card { grid-template-columns: 1fr; padding: 36px 24px; gap: 36px; }
+    .project-header { padding: 28px 24px; }
+    .detail-inner { padding: 28px 24px 32px; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <span class="nav-logo">Allison Lai</span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#prd">PRD</a></li>
+      <li><a href="#demo">AI Demo</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ① HERO -->
+<section id="hero">
+  <div class="container">
+    <p class="hero-eyebrow fi">Product Manager </p>
+    <h1 class="hero-name fi" style="transition-delay:.1s">赖莉晶 <em>Allison</em></h1>
+    <p class="hero-role fi" style="transition-delay:.2s">
+      从 MVP 到 Must Have，<br>让科技长出温度的年轮。
+    </p>
+    <div class="hero-ctas fi" style="transition-delay:.3s">
+      <a href="#" class="btn-primary" download>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        下载简历 PDF
+      </a>
+      <a href="#contact" class="btn-secondary">
+        联系我
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="scroll-hint">scroll</div>
+</section>
+
+<!-- ② ABOUT -->
+<section id="about">
+  <div class="container">
+    <p class="section-label fi">About</p>
+    <div class="about-grid">
+      <div class="about-meta fi">
+        <p class="name">赖莉晶</p>
+        <p class="title">Allison Lai · Product Manager </p>
+        <span class="status-dot">正在寻找机会</span>
+      </div>
+      <div class="about-text fi" style="transition-delay:.1s">
+        <p>我相信好的产品不是功能的堆叠，而是对用户真实处境的精准回应。成熟的产品经理将会持续关注如何让产品真正落地到业务场景，并为用户创造实际价值。</p>
+        <p>我主导过从 0 到 1 的 AI 产品，既参与过具身智能方向的科研，也负责过产品方案设计、PRD 撰写与 Demo 落地。我希望做的不只是"可用"的 AI 产品，而是真正理解用户状态、能够自然融入真实场景的产品体验。</p>
+        <p>目前正在寻找产品的岗位机会，期待加入您的团队。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ③ SKILLS -->
+<section id="skills">
+  <div class="container">
+    <p class="section-label fi">Skills</p>
+    <div class="skills-grid fi" style="transition-delay:.1s">
+      <div class="skill-group">
+        <p class="skill-group-title">产品能力</p>
+        <div class="tags">
+          <span class="tag">用户调研</span><span class="tag">PRD 撰写</span>
+          <span class="tag">需求拆解</span><span class="tag">原型设计</span>
+          <span class="tag">竞品分析</span><span class="tag">A/B 测试</span>
+          <span class="tag">优先级规划</span><span class="tag">思维导图</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-title">AI 相关</p>
+        <div class="tags">
+          <span class="tag">Prompt 设计</span><span class="tag">轻量化微调</span>
+          <span class="tag">RAG 搭建</span><span class="tag">Agent 搭建</span>
+          <span class="tag">AI coding</span><span class="tag">主流大模型特性</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-title">工具</p>
+        <div class="tags">
+          <span class="tag">Axure</span><span class="tag">Figma</span>
+          <span class="tag">Python</span><span class="tag">SQL</span>
+          <span class="tag">MATLAB</span><span class="tag">Excel</span>
+          <span class="tag">XMind</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ④ PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <p class="section-label fi">Projects</p>
+    <div class="projects-list">
+
+      <div class="project-card fi" onclick="toggleProj(this)">
+        <div class="project-header">
+          <div style="flex:1">
+            <p class="project-index">01 · 内容平台 · 小红书</p>
+            <h3 class="project-title">场景化推荐模式设计</h3>
+            <p class="project-sub">不只懂用户喜欢什么，更懂用户想要什么</p>
+          </div>
+        
+          <div class="proj-toggle">
+            <span class="proj-toggle-text">查看详情</span>
+             <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+        </div>
+        <div class="project-detail">
+          <div class="detail-inner">
+            <div class="detail-grid">
+              <div><p class="detail-lbl">背景问题</p><p class="detail-txt">现有推荐基于历史兴趣决策，难以捕捉用户当下状态。高压内容常侵入娱乐场景，推荐错配加剧了“越刷越焦虑”、体验割裂的问题。</p></div>
+              <div><p class="detail-lbl">我的思路</p><p class="detail-txt">在推荐系统中加入「场景层」，结合同步信号（时间段、模式选择、交互特征）识别当前心智，动态切换推荐逻辑，让算法更懂“此刻的用户”。</p></div>
+              <div><p class="detail-lbl">设计亮点</p><p class="detail-txt">双场景推荐结构——娱乐流保持探索感，学习流强化聚焦与连贯性。减少内容混杂，提升用户对推荐的掌控感与情绪沉浸度。</p></div>
+            </div>
+            <div class="img-placeholder" style="width:100%;margin:24px 0;text-align:center;"><img src="/Users/koukou/Desktop/page/redbook.png" alt="产品原型图" style="width:100%;height:auto;display:block;border-radius:12px;" /></div>
+            <div class="proj-tags"><span class="tag">推荐系统</span><span class="tag">场景感知</span><span class="tag">用户意图</span><span class="tag">内容平台</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fi" style="transition-delay:.1s" onclick="toggleProj(this)">
+        <div class="project-header">
+          <div style="flex:1">
+            <p class="project-index">02 · AI 出行 · 效率工具</p>
+            <h3 class="project-title">智能出行搭子</h3>
+            <p class="project-sub">通勤出行途中的全能搭子</p>
+          </div>
+           <div class="proj-toggle">
+            <span class="proj-toggle-text">查看详情</span>
+             <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+        </div>
+        <div class="project-detail">
+          <div class="detail-inner">
+            <div class="detail-grid">
+              <div><p class="detail-lbl">背景问题</p><p class="detail-txt">在开车出行场景中，用户常需同时处理导航、路况、情绪等多重需求；还要在突发或拥堵情况下保持安全与专注。</p></div>
+              <div><p class="detail-lbl">我的思路</p><p class="detail-txt">以「出行状态」为核心整合路线规划、实时路况播报、语音陪伴与应急提醒。通过轻量语音控制与智能内容推送，让用户安心开车，信息主动抵达，创造“像朋友在副驾”的低干扰体验。</p></div>
+              <div><p class="detail-lbl">落地结果</p><p class="detail-txt">系统可根据交互自动识别用户出行状态（通勤、旅行、拥堵、等待红灯等），动态匹配所需服务，如：实时路况更新、语音陪伴、应急提示等。在封闭测试中，回答准确率提升至82%，</p></div>
+            </div>
+             <div class="img-placeholder" style="width:100%;margin:24px 0;text-align:center;"><img src="carbot.png" alt="产品原型图" style="width:100%;height:auto;display:block;border-radius:12px;" /></div>
+            <div class="proj-tags"><span class="tag">AI 助手</span><span class="tag">语音交互</span><span class="tag">出行场景</span><span class="tag">效率工具</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fi" style="transition-delay:.2s" onclick="toggleProj(this)">
+        <div class="project-header">
+          <div style="flex:1">
+            <p class="project-index">03 · 无障碍 · 社会价值</p>
+            <h3 class="project-title">听障辅助 APP</h3>
+            <p class="project-sub">为听障外卖骑手带来更顺畅、更温情的沟通</p>
+          </div>
+           <div class="proj-toggle">
+            <span class="proj-toggle-text">查看详情</span>
+             <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+        </div>
+        <div class="project-detail">
+          <div class="detail-inner">
+            <div class="detail-grid">
+              <div><p class="detail-lbl">背景问题</p><p class="detail-txt">听障骑手在取餐、送餐、异常处理等高频沟通场景中，仍高度依赖固定字牌或手动打字沟通；由于手语语序与中文表达差异较大，文本沟通常出现理解偏差，影响沟通效率，也容易引发用户误解与投诉。</p></div>
+              <div><p class="detail-lbl">我的思路</p><p class="detail-txt">围绕“自然沟通”目标，设计“手语识别 → 语义理解 → 情绪润色 → 语音表达”的完整交互链路。通过视觉模型识别骑手手语动作，并结合大模型对不同场景下的语义与语气进行优化，最终生成更自然、更符合真实沟通场景的语音表达，在提升沟通效率的同时，尽可能保留交流中的情绪温度。</p></div>
+              <div><p class="detail-lbl">落地结果</p><p class="detail-txt">完成中文手语识别能力验证，并基于取餐、送餐、异常处理等核心场景完成语义生成与语音合成链路搭建。在内部测试中，沟通成功率达到 73.7%，能够有效降低高频场景中的沟通障碍。</p></div>
+            </div>
+             <div class="img-placeholder" style="width:100%;margin:24px 0;text-align:center;"><img src="listener.png" alt="产品原型图" style="width:100%;height:auto;display:block;border-radius:12px;" /></div>
+            <div class="proj-tags"><span class="tag">无障碍设计</span><span class="tag">手语识别</span><span class="tag">语音生成</span><span class="tag">外卖平台</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ⑤ PRD -->
+<section id="prd">
+  <div class="container">
+    <p class="section-label fi">PRD Documents</p>
+    <div class="prd-grid fi" style="transition-delay:.1s">
+      <a href="./小红书.md" target="_blank" class="prd-card"> 
+        <div class="prd-icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+        <p class="prd-name">小红书场景化推荐设计 PRD</p>
+        <p class="prd-desc">点击即可查看文件</p>
+        <p class="prd-meta">markdownn文件 · 2026</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ⑥ AI DEMO -->
+<section id="demo">
+  <div class="container">
+    <p class="section-label fi">AI Product Demo</p>
+    <p class="fi" style="font-size:15px;color:var(--c-muted);font-weight:300;margin-bottom:32px;max-width:480px;line-height:1.7;transition-delay:.05s">
+      这是我主导设计的 AI 工具产品，可以直接在这里体验核心功能。
+    </p>
+    <div class="demo-wrapper fi" style="transition-delay:.1s">
+      <div class="demo-header">
+        <div class="demo-dots"><span></span><span></span><span></span></div>
+        <span class="demo-url">AI Product · Live Demo</span>
+        <span class="demo-badge">Interactive</span>
+      </div>
+      <div class="demo-body" id="demo-body" style="position:relative;min-height:700px;">
+        
+        <!-- 启动前的占位 -->
+        <div class="demo-placeholder" id="demo-ph" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2;background:#fafafa;">
+          <div class="demo-placeholder-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="5 3 19 12 5 21 5 3"/>
+            </svg>
+          </div>
+          <p>点击启动 AI 产品 Demo</p>
+          <button class="demo-load-btn" onclick="loadDemo()">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            启动 Demo
+          </button>
+        </div>
+      
+        <!-- 👇 关键修改：src 留空，点击后再加载 -->
+        <iframe 
+          id="demo-iframe" 
+          src=""
+          style="width:100%;height:100%;min-height:700px;border:0;display:block;" 
+          allow="microphone"  
+          title="AI Product Demo">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 👇 别忘了加这段 JS -->
+<script>
+  function loadDemo() {
+    const iframe = document.getElementById('demo-iframe');
+    const placeholder = document.getElementById('demo-ph');
+    iframe.src = 'https://udify.app/chatbot/Fzjaei2Y6f5E9CI4';
+    placeholder.style.display = 'none';
+  }
+</script>
+
+
+<!-- ⑦ CONTACT -->
+<section id="contact">
+  <div class="container">
+    <p class="section-label fi">Contact</p>
+    <div class="contact-card fi" style="transition-delay:.1s">
+      <div>
+        <h2 class="contact-heading">Let's build<br>something <em>real.</em></h2>
+        <p class="contact-sub">如果你正在寻找对产品有深入思考的 PM，<br>欢迎随时联系我。</p>
+      </div>
+      <div class="contact-items">
+        <a href="mailto:allisonlai15070786891@gmail.com" class="contact-item">
+          <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div><p class="ci-label">Email</p><p class="ci-value">allisonlai15070786891@gmail.com</p></div>
+        </a>
+        <a href="tel:+8615070786891" class="contact-item">
+          <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.58 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div><p class="ci-label">电话</p><p class="ci-value">+86 150 7078 6891</p></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <span>© 2026 赖莉晶 Allison Lai</span>
+    <span>Product Manager </span>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll border
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 20));
+
+  // Scroll fade-in
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+
+  // Hero immediate reveal
+  setTimeout(() => document.querySelectorAll('#hero .fi').forEach(el => el.classList.add('in')), 80);
+
+  // Project toggle
+  function toggleProj(card) {
+    const wasOpen = card.classList.contains('open');
+    document.querySelectorAll('.project-card.open').forEach(c => c.classList.remove('open'));
+    if (!wasOpen) card.classList.add('open');
+  }
+
+  // Demo iframe
+  function loadDemo() {
+    const iframe = document.getElementById('demo-iframe');
+    iframe.src = iframe.dataset.src;
+    document.getElementById('demo-ph').style.display = 'none';
+    iframe.style.display = 'block';
+  }
+
+  // Copy WeChat
+  function copyWechat() {
+    const el = document.getElementById('wechat-val');
+    navigator.clipboard.writeText(el.textContent).then(() => {
+      const orig = el.textContent;
+      el.textContent = '已复制 ✓';
+      setTimeout(() => el.textContent = orig, 2000);
+    });
+  }
+</script>
+</body>
+</html>
