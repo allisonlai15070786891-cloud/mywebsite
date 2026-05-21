@@ -265,6 +265,59 @@
   .fi { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
   .fi.in { opacity: 1; transform: none; }
 
+  /* PRD MODAL */
+  .prd-modal-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: rgba(30,28,25,0.5);
+    backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    padding: 32px;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .prd-modal-overlay.open { opacity: 1; pointer-events: auto; }
+  .prd-modal {
+    background: var(--c-bg); border-radius: var(--radius-lg);
+    max-width: 780px; width: 100%; max-height: 85vh;
+    overflow-y: auto; padding: 48px 52px;
+    position: relative;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.18);
+    transform: translateY(12px);
+    transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+  }
+  .prd-modal-overlay.open .prd-modal { transform: translateY(0); }
+  .prd-modal-close {
+    position: sticky; top: 0; float: right;
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 1px solid var(--c-border); background: var(--c-surface);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 1; transition: background 0.2s;
+    font-size: 16px; color: var(--c-body); line-height: 1;
+  }
+  .prd-modal-close:hover { background: var(--c-tag-bg); }
+  .prd-modal-content { clear: both; }
+  .prd-modal-content h1 { font-family: var(--font-display); font-size: 28px; color: var(--c-heading); margin-bottom: 20px; line-height: 1.2; }
+  .prd-modal-content h2 { font-size: 18px; color: var(--c-heading); margin: 32px 0 12px; }
+  .prd-modal-content h3 { font-size: 15px; color: var(--c-heading); margin: 20px 0 8px; }
+  .prd-modal-content p { font-size: 14px; line-height: 1.85; color: var(--c-body); margin-bottom: 12px; font-weight: 300; }
+  .prd-modal-content ul, .prd-modal-content ol { margin: 8px 0 16px 20px; font-size: 14px; line-height: 1.85; color: var(--c-body); font-weight: 300; }
+  .prd-modal-content li { margin-bottom: 4px; }
+  .prd-modal-content strong { font-weight: 500; color: var(--c-heading); }
+  .prd-modal-content table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+  .prd-modal-content th, .prd-modal-content td { border: 1px solid var(--c-border); padding: 10px 14px; text-align: left; }
+  .prd-modal-content th { background: var(--c-surface); font-weight: 500; color: var(--c-heading); font-size: 12px; }
+  .prd-modal-content td { font-weight: 300; color: var(--c-body); }
+  .prd-modal-content hr { border: none; border-top: 1px solid var(--c-border); margin: 28px 0; }
+  .prd-modal-content blockquote { border-left: 3px solid var(--c-accent); padding-left: 16px; color: var(--c-muted); font-style: italic; margin: 16px 0; }
+  .prd-modal-content code { background: var(--c-surface); padding: 2px 7px; border-radius: 4px; font-size: 12px; }
+  .prd-modal-content pre { background: var(--c-surface); padding: 16px 20px; border-radius: var(--radius-sm); overflow-x: auto; margin: 16px 0; }
+  .prd-modal-content pre code { background: none; padding: 0; }
+  .prd-modal-content img { max-width: 100%; height: auto; border-radius: var(--radius-sm); margin: 16px 0; }
+  @media (max-width: 700px) {
+    .prd-modal { padding: 28px 22px; }
+    .prd-modal-overlay { padding: 12px; }
+  }
+
   /* RESPONSIVE */
   @media (max-width: 700px) {
     .about-grid { grid-template-columns: 1fr; }
@@ -310,7 +363,7 @@
       从 MVP 到 Must Have，<br>让科技长出温度的年轮。
     </p>
     <div class="hero-ctas fi" style="transition-delay:.3s">
-      <a href="resume.pdf" class="btn-primary" download>
+      <a href="#" class="btn-primary" download>
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         下载简历 PDF
       </a>
@@ -335,7 +388,7 @@
       </div>
       <div class="about-text fi" style="transition-delay:.1s">
         <p>我相信好的产品不是功能的堆叠，而是对用户真实处境的精准回应。成熟的产品经理将会持续关注如何让产品真正落地到业务场景，并为用户创造实际价值。</p>
-        <p>我主导过从 0 到 1 的 AI 产品，既参与过具身智能方向的科研，也负责过产品方案设计、PRD 撰写与 Demo 落地。我希望做的不只是"可用"的产品，而是真正理解用户状态、能够自然融入真实场景的产品体验。</p>
+        <p>我主导过从 0 到 1 的 AI 产品，既参与过具身智能方向的科研，也负责过产品方案设计、PRD 撰写与 Demo 落地。我希望做的不只是"可用"的 AI 产品，而是真正理解用户状态、能够自然融入真实场景的产品体验。</p>
         <p>目前正在寻找产品的岗位机会，期待加入您的团队。</p>
       </div>
     </div>
@@ -470,15 +523,18 @@
 </section>
 
 <!-- ⑤ PRD -->
+
+<!-- index.html -->
+
 <section id="prd">
   <div class="container">
     <p class="section-label fi">PRD Documents</p>
     <div class="prd-grid fi" style="transition-delay:.1s">
-      <a href="rednote.md" target="_blank" class="prd-card"> 
+      <a href="javascript:void(0)" class="prd-card" onclick="loadPRD('rednote.md')">
         <div class="prd-icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
         <p class="prd-name">小红书场景化推荐设计 PRD</p>
         <p class="prd-desc">点击即可查看文件</p>
-        <p class="prd-meta">markdownn文件 · 2026</p>
+        <p class="prd-meta">markdown文件 · 2026</p>
       </a>
     </div>
   </div>
@@ -605,6 +661,40 @@
       setTimeout(() => el.textContent = orig, 2000);
     });
   }
+ 
+
 </script>
+<!-- PRD Modal -->
+<div class="prd-modal-overlay" id="prd-modal-overlay" onclick="closePRD(event)">
+  <div class="prd-modal" onclick="event.stopPropagation()">
+    <button class="prd-modal-close" onclick="closePRD()">&times;</button>
+    <div class="prd-modal-content" id="prd-modal-content"></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+  async function loadPRD(file) {
+    const overlay = document.getElementById('prd-modal-overlay');
+    const content = document.getElementById('prd-modal-content');
+    content.innerHTML = '<p style="text-align:center;color:var(--c-muted);">加载中...</p>';
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    try {
+      const resp = await fetch(file);
+      const md = await resp.text();
+      content.innerHTML = marked.parse(md);
+    } catch(e) {
+      content.innerHTML = '<p style="color:var(--c-muted);">加载失败，请刷新后重试。</p>';
+    }
+  }
+  function closePRD(e) {
+    if (e && e.target !== document.getElementById('prd-modal-overlay')) return;
+    document.getElementById('prd-modal-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closePRD(); });
+</script>
+  
 </body>
 </html>
