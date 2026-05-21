@@ -1,2 +1,2 @@
 # mywebsite
-a website to introduce myself
+请您下载压缩包后打开html文件，即可打开我的个人网站，您可以在里面看到我的简历、项目介绍、prd展示和demo展示
